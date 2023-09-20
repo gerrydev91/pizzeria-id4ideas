@@ -1,0 +1,15 @@
+docker pull mysql:latest
+
+docker run --name don_remolo -e MYSQL_ROOT_PASSWORD=beto -d mysql:latest
+
+docker exec -it don_remolo mysql -uroot -p
+
+docker exec -it don_remolo mysql -uroot -p
+
+CREATE USER 'pizzeria'@'localhost' IDENTIFIED BY 'pizzeria';
+
+FLUSH PRIVILEGES;
+
+EXIT;
+
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' don_remolo
