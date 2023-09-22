@@ -30,14 +30,16 @@ public class Product {
     @Column
     private String description;
 
+    @Column
+    private Double price;
+
+    @Column
+    private String picUrl;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @Column
-    private Double price;
 
-
-    
 
 }

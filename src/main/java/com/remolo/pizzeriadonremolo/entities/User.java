@@ -37,7 +37,7 @@ public class User {
     private String phoneNumber;
 
 
-    @OneToMany(mappedBy = "users", cascade= CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade= CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
 
     }
