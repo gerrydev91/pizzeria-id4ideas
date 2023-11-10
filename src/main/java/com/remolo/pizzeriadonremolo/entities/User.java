@@ -1,5 +1,6 @@
 package com.remolo.pizzeriadonremolo.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jakarta.persistence.CascadeType;
@@ -21,11 +22,17 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name="users")
-public class User {
+public class User implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer  userId; 
+
+    @Column(unique = true)
+    private String userName;
+
+    @Column
+    private String password;
 
     @Column
     private String name; 
@@ -36,8 +43,12 @@ public class User {
     @Column
     private String phoneNumber;
 
+    @OneToMany(mappedBy = "users", cascade= CascadeType.ALL)
+    private List<Orders> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade= CascadeType.ALL)
+
+    @OneToMany(mappedBy = "users", cascade= CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
 
     }
+

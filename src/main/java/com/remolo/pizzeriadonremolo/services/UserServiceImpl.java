@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.remolo.pizzeriadonremolo.dto.UserAddressDTO;
+//import com.remolo.pizzeriadonremolo.dto.UserAddressDTO;
 import com.remolo.pizzeriadonremolo.entities.Address;
 import com.remolo.pizzeriadonremolo.entities.User;
 import com.remolo.pizzeriadonremolo.repository.AddressRepository;
@@ -64,17 +64,17 @@ public class UserServiceImpl implements UserService {
         
     }
 
-    @Override
-    @Transactional
-    public User createUserWithAddress(UserAddressDTO userAddressDTO) {
-        User user = userAddressDTO.getUser();
-        Address address = userAddressDTO.getAddress();
-        address = addressRepository.save(address);
-        user.getAddresses().add(address);
-        user = userRepository.save(user);
+    // @Override
+    // @Transactional
+    // public User createUserWithAddress(UserAddressDTO userAddressDTO) {
+    //     User user = userAddressDTO.getUser();
+    //     Address address = userAddressDTO.getAddress();
+    //     address = addressRepository.save(address);
+    //     user.getAddresses().add(address);
+    //     user = userRepository.save(user);
         
-        return user;
-    }
+    //     return user;
+    // }
 
     
 

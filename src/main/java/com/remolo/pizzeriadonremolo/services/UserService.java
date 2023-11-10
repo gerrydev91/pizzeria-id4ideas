@@ -2,7 +2,6 @@ package com.remolo.pizzeriadonremolo.services;
 
 import java.util.List;
 
-import com.remolo.pizzeriadonremolo.dto.UserAddressDTO;
 import com.remolo.pizzeriadonremolo.entities.User;
 
 public interface UserService {
@@ -18,7 +17,7 @@ public interface UserService {
 
     List<User>listAllUsers();
 
-    User  createUserWithAddress(UserAddressDTO userAddressDTO);
+    //User  createUserWithAddress(UserAddressDTO userAddressDTO);
 
     
 

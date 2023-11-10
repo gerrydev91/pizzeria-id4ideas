@@ -1,5 +1,6 @@
 package com.remolo.pizzeriadonremolo.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -32,6 +33,6 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category" , cascade= CascadeType.ALL)
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
 }
