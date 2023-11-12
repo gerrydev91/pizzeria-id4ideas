@@ -13,3 +13,5 @@ FLUSH PRIVILEGES;
 EXIT;
 
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' don_remolo
+
+To run the Mysql server on the container use: docker start don_remolo. 

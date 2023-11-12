@@ -4,16 +4,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.remolo.pizzeriadonremolo.dto.CategoryDTO;
 import com.remolo.pizzeriadonremolo.dto.ProductDTO;
 import com.remolo.pizzeriadonremolo.entities.Category;
 import com.remolo.pizzeriadonremolo.repository.CategoryRepository;
 import com.remolo.pizzeriadonremolo.repository.ProductRepository;
-
+@Service
 public class CategoryServiceImpl implements CategoryService{
 
     private final CategoryRepository categoryRepository;
-    private final ProductRepository productRepository;
+    private final ProductRepository productRepository;  
     private final ModelMapper modelMapper;
 
     @Autowired
