@@ -1,17 +1,18 @@
 package com.remolo.pizzeriadonremolo.services;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//import com.remolo.pizzeriadonremolo.dto.UserAddressDTO;
-import com.remolo.pizzeriadonremolo.entities.Address;
+import com.remolo.pizzeriadonremolo.dto.AddressDTO;
+import com.remolo.pizzeriadonremolo.dto.UserDTO;
 import com.remolo.pizzeriadonremolo.entities.User;
-import com.remolo.pizzeriadonremolo.repository.AddressRepository;
 import com.remolo.pizzeriadonremolo.repository.UserRepository;
-
-import jakarta.transaction.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,13 +21,11 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Autowired
-    private AddressRepository addressRepository;
+    private ModelMapper modelMapper;
 
-    
-
-    public UserServiceImpl(UserRepository userRepository, AddressRepository addressRepository) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;
-        this.addressRepository = addressRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -59,23 +58,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> listAllUsers() {
-        return userRepository.findAll();
-        
-    }
-
-    // @Override
-    // @Transactional
-    // public User createUserWithAddress(UserAddressDTO userAddressDTO) {
-    //     User user = userAddressDTO.getUser();
-    //     Address address = userAddressDTO.getAddress();
-    //     address = addressRepository.save(address);
-    //     user.getAddresses().add(address);
-    //     user = userRepository.save(user);
-        
-    //     return user;
-    // }
-
+    public List<UserDTO> listAllUsersWithAddress() {
+        List<User> users = userRepository.findAllWithAddress();
+        if(users.isEmpty()){
+            return Collections.emptyList();
+        }
     
+        return users.stream()
+            .map(user -> {
+                List<AddressDTO> addressDTOs = user.getAddresses().stream()
+                .map(address -> modelMapper.map(address, AddressDTO.class))
+                .collect(Collectors.toList());
+        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+        userDTO.setAddresses(addressDTOs);
+        return userDTO;
+            })
+            .collect(Collectors.toList());
+}
 
 }
