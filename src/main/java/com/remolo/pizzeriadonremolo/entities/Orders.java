@@ -1,10 +1,12 @@
 package com.remolo.pizzeriadonremolo.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,18 +22,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Data
-@Table(name = "ORDERS")
-public class Orders {
+@Table(name = "orders")
+public class Orders implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long orderId;
 
     private LocalDate datePlaced;
 
     private LocalDate dateDelivered;
 
-    @OneToMany(mappedBy = "orders")
+    @OneToMany(mappedBy = "orders", fetch = FetchType.LAZY)
+    //@JoinColumn(name="Order_items")
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @ManyToOne
@@ -43,6 +46,7 @@ public class Orders {
 
     @Column
     private Double total;
+
 
 
 }

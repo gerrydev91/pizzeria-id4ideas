@@ -2,6 +2,7 @@ package com.remolo.pizzeriadonremolo.services;
 
 import java.util.List;
 
+import com.remolo.pizzeriadonremolo.dto.OrderDTO;
 import com.remolo.pizzeriadonremolo.entities.Orders;
 
 public interface OrderService {
@@ -10,9 +11,9 @@ public interface OrderService {
 
     Orders UpdateOrder (Integer orderId, Orders updatedOrder);
 
-    List<Orders> getAllOrders();
+    List<OrderDTO> getAllOrders();
 
-    List<Orders> byUserId();
+    List<OrderDTO> byUserId();
 
 
     
