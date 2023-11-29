@@ -20,6 +20,8 @@ public interface OrdersRepository extends JpaRepository <Orders, Long> {
      @Query("SELECT o FROM Orders o LEFT JOIN FETCH o.orderItems WHERE o.orderId = :orderId")
     Orders findOrderWithOrderItems(@Param("orderId") Long orderId);
 
+    
+
 
 
     
