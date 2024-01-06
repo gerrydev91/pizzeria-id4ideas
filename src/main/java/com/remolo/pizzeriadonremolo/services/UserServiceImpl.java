@@ -41,11 +41,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByPhone(String phoneNumber) {
+    public UserDTO getUserByPhone(String phoneNumber) {
 
-        User user = userRepository.getUserByPhoneNumber(phoneNumber);
+        if (phoneNumber == null) {
 
-        return user;
+            throw new IllegalArgumentException("The phone number cannot be empty");
+        }
+
+        String phoneN = phoneNumber;
+        StringBuilder phoneCleaned = new StringBuilder();
+        for (int i=0; i<phoneN.length(); i++){
+            char c = phoneN.charAt(i);
+            if(Character.isDigit(c)){
+                phoneCleaned.append(c);
+            }
+
+            
+        }
+
+        User user = userRepository.getUserByPhoneNumber(phoneCleaned.toString());
+        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+
+
+        return userDTO;
     }
 
     @Override
